@@ -22,7 +22,21 @@ export default {
       error: false
     }
   },
+  created () {
+    console.log('created()')
+    this.checkCurrentLogin()
+  },
+  updated () {
+    console.log('updated()')
+    this.checkCurrentLogin()
+  },
   methods: {
+    checkCurrentLogin () {
+      console.log('checkCurrentLogin()')
+      if (localStorage.token) {
+        this.$router.replace(this.$route.query.redirect || '/authors')
+      }
+    },
     login () {
       console.log(this.email)
       console.log(this.password)
@@ -37,7 +51,7 @@ export default {
         this.loginFailed() // fail if no token
         return
       }
-
+      this.error = false
       localStorage.token = req.data.token
       console.log('localStorage.token=' + localStorage.token)
       this.error = false
