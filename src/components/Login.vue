@@ -23,16 +23,16 @@ export default {
     }
   },
   created () {
-    console.log('created()')
+    console.log('Login.created()')
     this.checkCurrentLogin()
   },
   updated () {
-    console.log('updated()')
+    console.log('Login.updated()')
     this.checkCurrentLogin()
   },
   methods: {
     checkCurrentLogin () {
-      console.log('checkCurrentLogin()')
+      console.log('Login.checkCurrentLogin()')
       if (localStorage.token) {
         this.$router.replace(this.$route.query.redirect || '/authors')
       }
@@ -46,7 +46,7 @@ export default {
     },
 
     loginSuccessful (req) {
-      console.log('loginSuccessful()')
+      console.log('Login.loginSuccessful()')
       if (!req.data.token) {
         this.loginFailed() // fail if no token
         return
@@ -60,7 +60,7 @@ export default {
     },
 
     loginFailed () {
-      console.log('loginFailed()')
+      console.log('Login.loginFailed()')
       this.error = 'Login failed!'
       delete localStorage.token
     }

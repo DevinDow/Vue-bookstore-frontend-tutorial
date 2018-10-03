@@ -8,7 +8,23 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  created () {
+    console.log('App.created()')
+    this.checkCurrentLogin()
+  },
+  updated () {
+    console.log('App.updated()')
+    this.checkCurrentLogin()
+  },
+  methods: {
+    checkCurrentLogin () {
+      console.log('App.checkCurrentLogin()')
+      if (!localStorage.token && this.$route.path !== '/') {
+        this.$router.push('/?redirect=' + this.$route.path)
+      }
+    }
+  }
 }
 </script>
 
