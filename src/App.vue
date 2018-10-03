@@ -7,8 +7,13 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'App',
+  computed: {
+    ...mapGetters({ currentUser: 'currentUser' })
+  },
   created () {
     console.log('App.created()')
     this.checkCurrentLogin()
@@ -20,7 +25,7 @@ export default {
   methods: {
     checkCurrentLogin () {
       console.log('App.checkCurrentLogin()')
-      if (!localStorage.token && this.$route.path !== '/') {
+      if (!this.currentUser && this.$route.path !== '/') {
         this.$router.push('/?redirect=' + this.$route.path)
       }
     }
