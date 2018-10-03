@@ -10,7 +10,7 @@ export default class User {
     }
   }
 
-  constructor ({ user_id, admin, email }) {
+  constructor ({ user_id, admin, email }) { // eslint-disable-line camelcase
     this.id = user_id // eslint-disable-line camelcase
     this.admin = admin
     this.email = email
