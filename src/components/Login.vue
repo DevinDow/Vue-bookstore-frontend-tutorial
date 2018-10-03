@@ -2,6 +2,7 @@
   <div class="login-wrapper border border-light">
     <form class="form-signin" @submit.prevent="login">
       <h2 class="form-signin-heading">Please sign in</h2>
+      <div class="alert alert-danger" v-if="error">{{ error }}</div>
       <label for="inputEmail" class="sr-only">Email address</label>
       <input v-model="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
       <label for="inputPassword" class="sr-only">Password</label>
@@ -17,13 +18,37 @@ export default {
   data () {
     return {
       email: '',
-      password: ''
+      password: '',
+      error: false
     }
   },
   methods: {
     login () {
       console.log(this.email)
       console.log(this.password)
+      this.$http.post('/auth', { user: this.email, password: this.password })
+        .then(request => this.loginSuccessful(request))
+        .catch(() => this.loginFailed())
+    },
+
+    loginSuccessful (req) {
+      console.log('loginSuccessful()')
+      if (!req.data.token) {
+        this.loginFailed() // fail if no token
+        return
+      }
+
+      localStorage.token = req.data.token
+      console.log('localStorage.token=' + localStorage.token)
+      this.error = false
+
+      this.$router.replace(this.$route.query.redirect || '/authors')
+    },
+
+    loginFailed () {
+      console.log('loginFailed()')
+      this.error = 'Login failed!'
+      delete localStorage.token
     }
   }
 }
