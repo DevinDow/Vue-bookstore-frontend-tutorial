@@ -11,7 +11,7 @@
 
 <script>
 import Box from './Box'
-import BooksList from '@/components/Books/List'
+import List from '@/components/Books/List'
 
 export default {
   name: 'Single',
@@ -27,7 +27,7 @@ export default {
   },
   components: {
     Box,
-    BooksList
+    List
   }
 }
 </script>
