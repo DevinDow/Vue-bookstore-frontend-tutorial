@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
 import Logout from '@/components/Logout'
-import HelloWorld from '@/components/HelloWorld'
+import AuthorsList from '@/components/Authors/List'
 
 Vue.use(Router)
 
@@ -22,7 +22,7 @@ export default new Router({
     {
       path: '/authors',
       name: 'Authors',
-      component: HelloWorld
+      component: AuthorsList
     }
   ]
 })
